@@ -1,0 +1,32 @@
+digraph G {
+esep=10;
+sep=10;
+nodesep=0.5;
+node [shape=box];
+"base_link" [label="base_link"];
+"Cuerpo1:12_link" [label="Cuerpo1:12_link"];
+"Cuerpo1:8_link" [label="Cuerpo1:8_link"];
+"Cuerpo1:6_link" [label="Cuerpo1:6_link"];
+"Cuerpo1:4_link" [label="Cuerpo1:4_link"];
+"Cuerpo1:3_link" [label="Cuerpo1:3_link"];
+"Cuerpo1:1_link" [label="Cuerpo1:1_link"];
+"Cuerpo1:25_link" [label="Cuerpo1:25_link"];
+"Cuerpo1:21_link" [label="Cuerpo1:21_link"];
+"Cuerpo1:19_link" [label="Cuerpo1:19_link"];
+"Cuerpo1:17_link" [label="Cuerpo1:17_link"];
+"Cuerpo1:16_link" [label="Cuerpo1:16_link"];
+"Cuerpo1:14_link" [label="Cuerpo1:14_link"];
+node [shape=ellipse, color=orange, fontcolor=black];
+"base_link" -> "Cuerpo1:12_link_joint" [label="xyz: -0.2142469882965088 5.386316902935505 -1.9172534942626953 \nrpy: 0.0 -1.570796314870016 0.0 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:12_link_joint_motor"] "Cuerpo1:12_link_joint" -> "Cuerpo1:12_link"
+"Cuerpo1:12_link" -> "Cuerpo1:8_link_joint" [label="xyz: -6.197719571406719 -0.21306029707193375 -0.2153387808772811 \nrpy: 1.570796370506284 1.5707963148700177 0.0 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:8_link_joint_motor"] "Cuerpo1:8_link_joint" -> "Cuerpo1:8_link"
+"Cuerpo1:8_link" -> "Cuerpo1:6_link_joint" [label="xyz: -0.0013291835784801087 -6.2031383513071745 0.0030484526816025315 \nrpy: -9.473119479150488e-16 0.0 8.881784064652341e-16 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:6_link_joint_motor"] "Cuerpo1:6_link_joint" -> "Cuerpo1:6_link"
+"Cuerpo1:6_link" -> "Cuerpo1:4_link_joint" [label="xyz: 2.3841859864148773e-07 -6.199327365781554 -0.09695267979161928 \nrpy: -2.6054017533779712e-15 0.0 0.0 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:4_link_joint_motor"] "Cuerpo1:4_link_joint" -> "Cuerpo1:4_link"
+"Cuerpo1:4_link" -> "Cuerpo1:3_link_joint" [label="xyz: 0.0005545616149942312 -4.360876331014116 -0.21096364997643474 \nrpy: -1.5707963705062822 0.0 0.0 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:3_link_joint_motor"] "Cuerpo1:3_link_joint" -> "Cuerpo1:3_link"
+"Cuerpo1:3_link" -> "Cuerpo1:1_link_joint" [label="xyz: 3.0604408532381058 -2.7939677238464355e-09 -0.21273064613341974 \nrpy: 0.0 -1.5707962512969988 0.0 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:1_link_joint_motor"] "Cuerpo1:1_link_joint" -> "Cuerpo1:1_link"
+"base_link" -> "Cuerpo1:25_link_joint" [label="xyz: -0.2142469882965088 -5.387140274047852 -2.1956844329833984 \nrpy: 0.0 -1.5707962512969982 0.0 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:25_link_joint_motor"] "Cuerpo1:25_link_joint" -> "Cuerpo1:25_link"
+"Cuerpo1:25_link" -> "Cuerpo1:21_link_joint" [label="xyz: -6.197916007176662 -0.2145843505859375 -0.3140103727911012 \nrpy: 1.5707963705062875 1.5707962512970068 0.0 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:21_link_joint_motor"] "Cuerpo1:21_link_joint" -> "Cuerpo1:21_link"
+"Cuerpo1:21_link" -> "Cuerpo1:19_link_joint" [label="xyz: 2.3841866703122605e-07 -6.201509475574015 0.0030653803295415116 \nrpy: 1.7634072429718396e-24 0.0 8.470329472542988e-22 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:19_link_joint_motor"] "Cuerpo1:19_link_joint" -> "Cuerpo1:19_link"
+"Cuerpo1:19_link" -> "Cuerpo1:17_link_joint" [label="xyz: 8.837375276016246e-14 -6.2005887073941 -0.09696742610719333 \nrpy: -9.473117361568058e-16 0.0 -8.470328841454279e-22 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:17_link_joint_motor"] "Cuerpo1:17_link_joint" -> "Cuerpo1:17_link"
+"Cuerpo1:17_link" -> "Cuerpo1:16_link_joint" [label="xyz: -0.00021672250125925885 -4.360540182328229 -0.21143895468790852 \nrpy: -1.570796340703967 0.0 0.0 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:16_link_joint_motor"] "Cuerpo1:16_link_joint" -> "Cuerpo1:16_link"
+"Cuerpo1:16_link" -> "Cuerpo1:14_link_joint" [label="xyz: 3.061215989291671 -0.0004968643188476562 -0.2137022018432182 \nrpy: -1.3411121708673545e-22 -1.5707962512969982 0.0 \naxis: 0.0 0.0 1.0 \ntype: revolute \nmotor: Cuerpo1:14_link_joint_motor"] "Cuerpo1:14_link_joint" -> "Cuerpo1:14_link"
+}

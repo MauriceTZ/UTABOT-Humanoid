@@ -1,0 +1,15 @@
+{
+  "additional_files": {},
+  "description": "",
+  "files": [
+    "../urdf/Humanoid.urdf",
+    "Humanoid_collisions.yml",
+    "Humanoid_joints.yml",
+    "Humanoid_links.yml",
+    "Humanoid_materials.yml",
+    "Humanoid_motors.yml",
+    "Humanoid_visuals.yml"
+  ],
+  "modelname": "Humanoid",
+  "version": "0.0.0"
+}

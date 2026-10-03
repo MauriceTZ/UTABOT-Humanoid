@@ -1,0 +1,398 @@
+<robot name="Humanoid" version="1.0">
+  <joint name="Cuerpo1:12_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="0.00000 -1.57080 0.00000" xyz="-0.21425 5.38632 -1.91725"/>
+    <parent link="base_link"/>
+    <child link="Cuerpo1:12_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:8_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="1.57080 1.57080 0.00000" xyz="-6.19772 -0.21306 -0.21534"/>
+    <parent link="Cuerpo1:12_link"/>
+    <child link="Cuerpo1:8_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:16_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="-1.57080 0.00000 0.00000" xyz="-0.00022 -4.36054 -0.21144"/>
+    <parent link="Cuerpo1:17_link"/>
+    <child link="Cuerpo1:16_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:14_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="-0.00000 -1.57080 0.00000" xyz="3.06122 -0.00050 -0.21370"/>
+    <parent link="Cuerpo1:16_link"/>
+    <child link="Cuerpo1:14_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:6_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00133 -6.20314 0.00305"/>
+    <parent link="Cuerpo1:8_link"/>
+    <child link="Cuerpo1:6_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:4_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="-0.00000 0.00000 0.00000" xyz="0.00000 -6.19933 -0.09695"/>
+    <parent link="Cuerpo1:6_link"/>
+    <child link="Cuerpo1:4_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:3_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="-1.57080 0.00000 0.00000" xyz="0.00055 -4.36088 -0.21096"/>
+    <parent link="Cuerpo1:4_link"/>
+    <child link="Cuerpo1:3_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:1_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="0.00000 -1.57080 0.00000" xyz="3.06044 -0.00000 -0.21273"/>
+    <parent link="Cuerpo1:3_link"/>
+    <child link="Cuerpo1:1_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:25_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="0.00000 -1.57080 0.00000" xyz="-0.21425 -5.38714 -2.19568"/>
+    <parent link="base_link"/>
+    <child link="Cuerpo1:25_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:21_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="1.57080 1.57080 0.00000" xyz="-6.19792 -0.21458 -0.31401"/>
+    <parent link="Cuerpo1:25_link"/>
+    <child link="Cuerpo1:21_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:19_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -6.20151 0.00307"/>
+    <parent link="Cuerpo1:21_link"/>
+    <child link="Cuerpo1:19_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <joint name="Cuerpo1:17_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="0.00000" velocity="0.00000"/>
+    <origin rpy="-0.00000 0.00000 -0.00000" xyz="0.00000 -6.20059 -0.09697"/>
+    <parent link="Cuerpo1:19_link"/>
+    <child link="Cuerpo1:17_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+  <link name="base_link">
+    <collision name="Cuerpo2:1_collision">
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo2:1.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="15.55730" ixy="-0.00000" ixz="-0.00000" iyy="11.53222" iyz="-0.00000" izz="21.83108"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 1.64569"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo1:12">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.21425 4.43989 -1.91725"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:12.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+    <visual name="Cuerpo1:25">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.21425 -4.43991 -2.19568"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:25.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+    <visual name="Cuerpo2:1">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo2:1.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:12_link">
+    <collision name="Cuerpo3:3_collision">
+      <origin rpy="-0.00000 1.57080 0.00000" xyz="-0.69217 0.00107 -0.21290"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:3.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="1.44101" ixy="-0.00000" ixz="-0.00009" iyy="2.76047" iyz="-0.00014" izz="2.12303"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-1.50152 0.00067 -0.21269"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo3:3">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-0.00000 1.57080 0.00000" xyz="-0.69217 0.00107 -0.21290"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:3.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:17_link">
+    <collision name="Cuerpo3:4_collision">
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="-0.00072 -0.64980 -0.21244"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:4.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="2.78919" ixy="0.00000" ixz="0.00027" iyy="1.47896" iyz="0.00007" izz="2.11110"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00020 -1.49500 -0.21274"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo3:4">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="-0.00072 -0.64980 -0.21244"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:4.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:16_link">
+    <collision name="Cuerpo1:15_collision">
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.95738 -0.05212 -0.19764"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:15.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="1.87659" ixy="-0.00288" ixz="0.00051" iyy="1.35544" iyz="0.00089" izz="0.62661"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="1.16841 -0.00039 -0.21445"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo1:15">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-0.00000 0.00000 -0.00000" xyz="0.95737 -0.05212 -0.19764"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:15.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+    <visual name="Cuerpo1:16">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="-0.94716 -0.00050 0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:16.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:14_link">
+    <collision name="Cuerpo1:13_collision">
+      <origin rpy="0.00000 1.57080 -0.00000" xyz="-3.68213 0.00025 0.79409"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:13.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="3.01623" ixy="0.00000" ixz="-0.51058" iyy="5.85601" iyz="0.00000" izz="7.95597"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-3.82332 0.00024 0.86199"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo1:13">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="0.00000 1.57080 0.00000" xyz="-3.68213 0.00025 0.79409"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:13.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+    <visual name="Cuerpo1:14">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="0.00000 1.57080 0.00000" xyz="-0.94815 0.00000 0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:14.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:8_link">
+    <collision name="Cuerpo3:2_collision">
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="-0.00121 -0.69475 -0.21252"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:2.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="2.76042" ixy="0.00000" ixz="-0.00014" iyy="1.44106" iyz="0.00009" izz="2.12303"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00160 -1.50380 -0.21276"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo3:2">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="-0.00121 -0.69475 -0.21252"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:2.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:6_link">
+    <collision name="Cuerpo3:1_collision">
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="0.00012 -0.69151 -0.31252"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:1.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="2.76042" ixy="0.00000" ixz="-0.00014" iyy="1.44106" iyz="0.00009" izz="2.12303"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00027 -1.50066 -0.31276"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo3:1">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="0.00012 -0.69151 -0.31252"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:1.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:4_link">
+    <collision name="Cuerpo3_collision">
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="-0.00074 -0.65023 -0.21256"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="2.78918" ixy="0.00000" ixz="0.00027" iyy="1.47896" iyz="0.00007" izz="2.11110"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00020 -1.49531 -0.21276"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo3">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="-0.00074 -0.65023 -0.21256"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:3_link">
+    <collision name="Cuerpo1:2_collision">
+      <origin rpy="0.00000 -0.00000 0.00000" xyz="0.95659 -0.05163 -0.19761"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:2.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="1.87659" ixy="-0.00288" ixz="0.00051" iyy="1.35544" iyz="0.00089" izz="0.62661"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="1.16763 0.00010 -0.21442"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo1:2">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.95659 -0.05163 -0.19761"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:2.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:1_link">
+    <collision name="Cuerpo1_collision">
+      <origin rpy="-0.00000 1.57080 0.00000" xyz="-3.68383 0.01137 0.79566"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="3.01623" ixy="-0.00000" ixz="-0.51058" iyy="5.85601" iyz="-0.00000" izz="7.95597"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-3.82426 0.00023 0.86198"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo1">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-0.00000 1.57080 0.00000" xyz="-3.68307 0.00023 0.79409"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:25_link">
+    <collision name="Cuerpo3:7_collision">
+      <origin rpy="0.00000 1.57080 0.00000" xyz="-0.69212 -0.00046 -0.31291"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:7.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="1.44101" ixy="-0.00000" ixz="-0.00009" iyy="2.76047" iyz="-0.00014" izz="2.12303"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-1.50104 -0.00087 -0.31269"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo1:21">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-0.00000 1.57080 0.00000" xyz="-5.25215 -0.21459 -0.31401"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:21.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+    <visual name="Cuerpo3:7">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-0.00000 1.57080 0.00000" xyz="-0.69212 -0.00046 -0.31291"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:7.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:21_link">
+    <collision name="Cuerpo3:6_collision">
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="0.00014 -0.69401 -0.21240"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:6.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="2.76042" ixy="0.00000" ixz="-0.00014" iyy="1.44106" iyz="0.00009" izz="2.12303"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00027 -1.50313 -0.21274"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo1:19">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="-0.00000 -5.25418 0.00307"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:19.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+    <visual name="Cuerpo3:6">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="0.00014 -0.69401 -0.21240"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:6.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Cuerpo1:19_link">
+    <collision name="Cuerpo3:5_collision">
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="0.00014 -0.69235 -0.31257"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:5.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <inertia ixx="2.76042" ixy="0.00000" ixz="-0.00014" iyy="1.44106" iyz="0.00009" izz="2.12303"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.00027 -1.50161 -0.31276"/>
+      <mass value="0.90000"/>
+    </inertial>
+    <visual name="Cuerpo1:17">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="-0.00000 -5.25281 -0.09697"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo1:17.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+    <visual name="Cuerpo3:5">
+      <material name="Acero_-_Satinado.001"/>
+      <origin rpy="-1.57080 0.00000 0.00000" xyz="0.00014 -0.69235 -0.31257"/>
+      <geometry>
+        <mesh filename="../meshes/obj/Cuerpo3:5.obj" scale="1.00000 1.00000 1.00000"/>
+      </geometry>
+    </visual>
+  </link>
+  <material name="Acero_-_Satinado.001">
+    <color rgba="0.62745 0.62745 0.62745 1.00000"/>
+  </material>
+</robot>

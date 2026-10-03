@@ -1,0 +1,261 @@
+{
+  "links": [
+    {
+      "model": {
+        "name": "Humanoid"
+      },
+      "name": "base_link",
+      "originRoot": {
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo1:12",
+        "Cuerpo1:25",
+        "Cuerpo2:1"
+      ]
+    },
+    {
+      "name": "Cuerpo1:12_link",
+      "originRoot": {
+        "position": [
+          -0.2142469882965088,
+          5.386316902935505,
+          -1.9172534942626953
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          0.0,
+          -1.570796314870016,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo3:3"
+      ]
+    },
+    {
+      "name": "Cuerpo1:8_link",
+      "originRoot": {
+        "position": [
+          0.0010917186737060547,
+          5.173256605863571,
+          -8.114973068237305
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          1.570796370506284,
+          1.9984014443252818e-15,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo3:2"
+      ]
+    },
+    {
+      "name": "Cuerpo1:6_link",
+      "originRoot": {
+        "position": [
+          -0.00023746490478515625,
+          5.170208424329758,
+          -14.318111419677734
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          1.5707964003086055,
+          1.1102230246251565e-15,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo3:1"
+      ]
+    },
+    {
+      "name": "Cuerpo1:4_link",
+      "originRoot": {
+        "position": [
+          -0.0002372264862060547,
+          5.2671613693237305,
+          -20.517438411712646
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          1.5707963705062804,
+          8.881784197001252e-16,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo3"
+      ]
+    },
+    {
+      "name": "Cuerpo1:3_link",
+      "originRoot": {
+        "position": [
+          0.0003173351287841797,
+          5.478125209920108,
+          -24.87831473350525
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          0.0,
+          8.881784197001252e-16,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo1:2"
+      ]
+    },
+    {
+      "name": "Cuerpo1:1_link",
+      "originRoot": {
+        "position": [
+          3.06075818836689,
+          5.478125207126141,
+          -25.091045379638672
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          0.0,
+          -1.5707962512969982,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo1"
+      ]
+    },
+    {
+      "name": "Cuerpo1:25_link",
+      "originRoot": {
+        "position": [
+          -0.2142469882965088,
+          -5.387140274047852,
+          -2.1956844329833984
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          0.0,
+          -1.5707962512969982,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo1:21",
+        "Cuerpo3:7"
+      ]
+    },
+    {
+      "name": "Cuerpo1:21_link",
+      "originRoot": {
+        "position": [
+          0.0997629165649414,
+          -5.601724624633789,
+          -8.393600463867188
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          1.5707963705062875,
+          1.3988810110276972e-14,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo1:19",
+        "Cuerpo3:6"
+      ]
+    },
+    {
+      "name": "Cuerpo1:19_link",
+      "originRoot": {
+        "position": [
+          0.09976315498352051,
+          -5.604789733886719,
+          -14.595109939575195
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          1.5707963705062875,
+          1.3988810110276972e-14,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo1:17",
+        "Cuerpo3:5"
+      ]
+    },
+    {
+      "name": "Cuerpo1:17_link",
+      "originRoot": {
+        "position": [
+          0.09976315498352051,
+          -5.507822036743164,
+          -20.795698642730713
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          1.570796400308609,
+          1.4210854715202004e-14,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo3:4"
+      ]
+    },
+    {
+      "name": "Cuerpo1:16_link",
+      "originRoot": {
+        "position": [
+          0.09954643249511719,
+          -5.296382904052734,
+          -25.156238555908203
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          -1.2779841994642332e-42,
+          1.4210854715202004e-14,
+          -1.800745491059693e-28
+        ]
+      },
+      "visuals": [
+        "Cuerpo1:15",
+        "Cuerpo1:16"
+      ]
+    },
+    {
+      "name": "Cuerpo1:14_link",
+      "originRoot": {
+        "position": [
+          3.160762421786785,
+          -5.296879768371582,
+          -25.369940757751465
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          -1.341113721576084e-22,
+          -1.570796251296984,
+          0.0
+        ]
+      },
+      "visuals": [
+        "Cuerpo1:13",
+        "Cuerpo1:14"
+      ]
+    }
+  ]
+}

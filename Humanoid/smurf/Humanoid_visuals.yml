@@ -1,0 +1,804 @@
+{
+  "visuals": [
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1:12.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1:12"
+      },
+      "name": "Cuerpo1:12",
+      "origin": {
+        "position": [
+          -0.2142472267150879,
+          4.439894080162048,
+          -1.9172534942626953
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo1:12"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1:25.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1:25"
+      },
+      "name": "Cuerpo1:25",
+      "origin": {
+        "position": [
+          -0.2142472267150879,
+          -4.439907073974609,
+          -2.1956844329833984
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo1:25"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo2:1.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo2:1"
+      },
+      "name": "Cuerpo2:1",
+      "origin": {
+        "position": [
+          2.384185791015625e-07,
+          0.0,
+          0.0
+        ],
+        "relative_to": "base_link",
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo2:1"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo3:3.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo3:3"
+      },
+      "name": "Cuerpo3:3",
+      "origin": {
+        "position": [
+          -0.6921710942629176,
+          0.0010736435651779175,
+          -0.21290279260159162
+        ],
+        "relative_to": "Cuerpo1:12_link",
+        "rotation": [
+          -0.0,
+          1.5707963148700177,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo3:3"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo3:2.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo3:2"
+      },
+      "name": "Cuerpo3:2",
+      "origin": {
+        "position": [
+          -0.0012099742889390974,
+          -0.6947479340942913,
+          -0.21252142581360633
+        ],
+        "relative_to": "Cuerpo1:8_link",
+        "rotation": [
+          -1.5707963705062857,
+          0.0,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo3:2"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo3:1.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo3:1"
+      },
+      "name": "Cuerpo3:1",
+      "origin": {
+        "position": [
+          0.00011897087806334028,
+          -0.6915140700759874,
+          -0.31252227634693613
+        ],
+        "relative_to": "Cuerpo1:6_link",
+        "rotation": [
+          -1.5707963407039633,
+          0.0,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo3:1"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo3.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo3"
+      },
+      "name": "Cuerpo3",
+      "origin": {
+        "position": [
+          -0.0007395744323726028,
+          -0.6502342317033865,
+          -0.21255965016914913
+        ],
+        "relative_to": "Cuerpo1:4_link",
+        "rotation": [
+          -1.5707963705062822,
+          0.0,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo3"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1:2.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1:2"
+      },
+      "name": "Cuerpo1:2",
+      "origin": {
+        "position": [
+          0.9565889835357666,
+          -0.051633614115417004,
+          -0.19760727882385165
+        ],
+        "relative_to": "Cuerpo1:3_link",
+        "rotation": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo1:2"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1"
+      },
+      "name": "Cuerpo1",
+      "origin": {
+        "position": [
+          -3.683069289077858,
+          0.00023043714463710785,
+          0.7940867295777907
+        ],
+        "relative_to": "Cuerpo1:1_link",
+        "rotation": [
+          -0.0,
+          1.5707962512969926,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo1"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1:21.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1:21"
+      },
+      "name": "Cuerpo1:21",
+      "origin": {
+        "position": [
+          -5.252151465550693,
+          -0.2145853042602539,
+          -0.31401030138786323
+        ],
+        "relative_to": "Cuerpo1:25_link",
+        "rotation": [
+          -0.0,
+          1.5707962512969926,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo1:21"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo3:7.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo3:7"
+      },
+      "name": "Cuerpo3:7",
+      "origin": {
+        "position": [
+          -0.692121482113567,
+          -0.00046062469482421875,
+          -0.31290584067535043
+        ],
+        "relative_to": "Cuerpo1:25_link",
+        "rotation": [
+          -0.0,
+          1.5707962512970064,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo3:7"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1:19.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1:19"
+      },
+      "name": "Cuerpo1:19",
+      "origin": {
+        "position": [
+          -2.3841850449457525e-07,
+          -5.2541780470461426,
+          0.0030662925946813857
+        ],
+        "relative_to": "Cuerpo1:21_link",
+        "rotation": [
+          -1.5707963705062893,
+          0.0,
+          1.4210854715202004e-14
+        ]
+      },
+      "original_name": "Cuerpo1:19"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo3:6.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo3:6"
+      },
+      "name": "Cuerpo3:6",
+      "origin": {
+        "position": [
+          0.00013732910157226996,
+          -0.6940078828195979,
+          -0.2124032670882663
+        ],
+        "relative_to": "Cuerpo1:21_link",
+        "rotation": [
+          -1.5707963705062857,
+          0.0,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo3:6"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1:17.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1:17"
+      },
+      "name": "Cuerpo1:17",
+      "origin": {
+        "position": [
+          -7.152556626977002e-07,
+          -5.25281143612335,
+          -0.0969674675358565
+        ],
+        "relative_to": "Cuerpo1:19_link",
+        "rotation": [
+          -1.5707963705062893,
+          0.0,
+          1.4210854715202004e-14
+        ]
+      },
+      "original_name": "Cuerpo1:17"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo3:5.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo3:5"
+      },
+      "name": "Cuerpo3:5",
+      "origin": {
+        "position": [
+          0.00013756752015137153,
+          -0.6923513549102864,
+          -0.31256672693850795
+        ],
+        "relative_to": "Cuerpo1:19_link",
+        "rotation": [
+          -1.5707963705062857,
+          0.0,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo3:5"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo3:4.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo3:4"
+      },
+      "name": "Cuerpo3:4",
+      "origin": {
+        "position": [
+          -0.0007214546633544927,
+          -0.6497974875923367,
+          -0.21244333600466447
+        ],
+        "relative_to": "Cuerpo1:17_link",
+        "rotation": [
+          -1.570796340703967,
+          0.0,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo3:4"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1:15.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1:15"
+      },
+      "name": "Cuerpo1:15",
+      "origin": {
+        "position": [
+          0.957374811172488,
+          -0.05212116241455078,
+          -0.19763827323912242
+        ],
+        "relative_to": "Cuerpo1:16_link",
+        "rotation": [
+          -1.3096547079451759e-49,
+          0.0,
+          -1.2037062152420224e-35
+        ]
+      },
+      "original_name": "Cuerpo1:15"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1:16.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1:16"
+      },
+      "name": "Cuerpo1:16",
+      "origin": {
+        "position": [
+          -0.9471604824066158,
+          -0.0004968643188476562,
+          3.576278672756672e-06
+        ],
+        "relative_to": "Cuerpo1:16_link",
+        "rotation": [
+          5.605193857299268e-43,
+          -1.4210854715202004e-14,
+          1.800745491059693e-28
+        ]
+      },
+      "original_name": "Cuerpo1:16"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1:13.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1:13"
+      },
+      "name": "Cuerpo1:13",
+      "origin": {
+        "position": [
+          -3.6821272376673995,
+          0.00025081634522727825,
+          0.794089449110779
+        ],
+        "relative_to": "Cuerpo1:14_link",
+        "rotation": [
+          1.0587911851332566e-21,
+          1.570796251296985,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo1:13"
+    },
+    {
+      "geometry": {
+        "exported": {
+          "obj": {
+            "export_operation": "blender_export",
+            "filepath": "../meshes/obj/Cuerpo1:14.obj",
+            "operations": [
+              "_initiated_in_blender"
+            ]
+          }
+        },
+        "geometry_type": "mesh",
+        "imported": "input file not known",
+        "mesh_orientation": {
+          "forward": "Y",
+          "up": "Z"
+        },
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unique_name": "Cuerpo1:14"
+      },
+      "name": "Cuerpo1:14",
+      "origin": {
+        "position": [
+          -0.9481534957886759,
+          1.9073486363652137e-06,
+          1.3514772815304e-06
+        ],
+        "relative_to": "Cuerpo1:14_link",
+        "rotation": [
+          3.552713890558641e-15,
+          1.570796251296978,
+          0.0
+        ]
+      },
+      "original_name": "Cuerpo1:14"
+    }
+  ]
+}
