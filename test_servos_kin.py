@@ -29,6 +29,11 @@ PUERTO = "/dev/ttyUSB0"
 BAUD_RATE = 1000000
 
 
+def sin_ramp(t, a=1):
+    s = math.sin(t)
+    return math.copysign(abs(s)**a, s)
+
+
 def rad_a_dynamixel(angulo_rad, centro_fisico, invertir=False):
     direccion = -1 if invertir else 1
     pasos = int(centro_fisico + (direccion *
@@ -62,7 +67,7 @@ def matriz_rotacion_rpy(roll, pitch, yaw):
         [math.sin(yaw), math.cos(yaw), 0],
         [0, 0, 1]
     ])
-    
+
     # Multiplicación de matrices en orden ZYX
     return Rz @ Ry @ Rx
 
@@ -125,10 +130,10 @@ def iniciar_robot(visualizar=False):
     centros_fisicos_izq = {}
     centros_fisicos_der = {}
 
-    config_giro_izq = {6: False, 7: False,
+    config_giro_izq = {6: True, 7: False,
                        8: False, 9: False, 10: False, 11: False}
     config_giro_der = {0: False, 1: False,
-                       2: False, 3: False, 4: False, 5: False}
+                       2: False, 3: False, 4: False, 5: True}
 
     portHandler = PortHandler(PUERTO)
     packetHandler = PacketHandler(2.0)
@@ -192,12 +197,15 @@ def iniciar_robot(visualizar=False):
         return
 
     # Parámetros de marcha cinemática
-    X_REPOSO = 2.5
-    Z_REPOSO = -23
-    AMPLITUD_PASO = 2#5.0
-    ALTURA_PASO = 2.0
-    VELOCIDAD = 1.0
-    BALANCEO_Y = 0#5
+    X_REPOSO = 0.0
+    Z_REPOSO = -23.0
+    AMPLITUD_PASO_X = 0#2.0
+    ALTURA_PASO_Z = 3.0
+    VELOCIDAD = 2.0
+    BALANCEO_Y = 5#4.5
+    GRAD_BALANCEO_ROLL = 15.0
+    GRAD_GIRO_YAW = 7
+
     DIST_CADERA_IZQ = 5.386316902935505
     DIST_CADERA_DER = -5.387140274047852
 
@@ -230,24 +238,25 @@ def iniciar_robot(visualizar=False):
             t = (time.time() - tiempo_inicio) * VELOCIDAD
 
             # --- A. Generador de Trayectorias ---
-            x_izq = X_REPOSO + math.sin(t) * AMPLITUD_PASO
-            y_izq = DIST_CADERA_IZQ + abs(math.sin(t) * BALANCEO_Y)
-            z_izq = Z_REPOSO + max(0, math.cos(t) * ALTURA_PASO)
+            x_izq = X_REPOSO + math.sin(t) * AMPLITUD_PASO_X
+            y_izq = DIST_CADERA_IZQ + (sin_ramp(t - math.pi/2, 1) * BALANCEO_Y)
+            z_izq = Z_REPOSO + max(0, math.cos(t) * ALTURA_PASO_Z)
             target_izq = np.array([x_izq, y_izq, z_izq])
 
-            x_der = X_REPOSO + math.sin(t + math.pi) * AMPLITUD_PASO
-            y_der = DIST_CADERA_DER + abs(math.cos(t) * BALANCEO_Y)
-            z_der = Z_REPOSO + max(0, math.cos(t + math.pi) * ALTURA_PASO)
+            x_der = X_REPOSO + math.sin(t + math.pi) * AMPLITUD_PASO_X
+            y_der = DIST_CADERA_DER + (sin_ramp(t - math.pi/2, 1) * BALANCEO_Y)
+            z_der = Z_REPOSO + max(0, math.cos(t + math.pi) * ALTURA_PASO_Z)
             target_der = np.array([x_der, y_der, z_der])
 
             # --- A.2 Inyección de Giro (Orientación Dinámica) ---
-            # Ejemplo: Girar los pies 45 grados rítmicamente para probar el algoritmo
-            yaw_izq = math.sin(t) * math.radians(45)
-            yaw_der = math.sin(t + math.pi) * math.radians(45)
-            
+            roll_izq = -math.sin(t) * math.radians(GRAD_BALANCEO_ROLL)
+            roll_der = -math.sin(t) * math.radians(GRAD_BALANCEO_ROLL)
+            yaw_izq = math.sin(t) * math.radians(GRAD_GIRO_YAW)
+            yaw_der = math.sin(t + math.pi) * math.radians(GRAD_GIRO_YAW)
+
             # Mantendremos Roll y Pitch en 0.0 para que la planta del pie siga paralela al suelo
-            matriz_dinamica_izq = matriz_rotacion_rpy(0.0, 0.0, yaw_izq) @ orientacion_plana_izq
-            matriz_dinamica_der = matriz_rotacion_rpy(0.0, 0.0, yaw_der) @ orientacion_plana_der
+            matriz_dinamica_izq = matriz_rotacion_rpy(roll_izq, 0.0, yaw_izq) @ orientacion_plana_izq
+            matriz_dinamica_der = matriz_rotacion_rpy(roll_der, 0.0, yaw_der) @ orientacion_plana_der
 
             # --- B. Cinemática Inversa ---
             solucion_izq = pierna_izquierda.inverse_kinematics(
