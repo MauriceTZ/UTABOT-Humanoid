@@ -34,6 +34,7 @@ PROFILE_VEL = 0          # 0 = sin límite; se limita por software con VEL_MAX_S
 VEL_MAX_SOFT = 6.0       # rad/s, tope de seguridad por servo
 T_AGACHARSE = 2.0        # s para pasar de pierna recta a la postura de marcha
 CICLOS_RAMPA = 2.0       # ciclos para llegar a la amplitud completa
+FPS_TABLA = 60           # resolución de la tabla de marcha precalculada
 
 
 def sin_ramp(t, a=1):
@@ -143,8 +144,82 @@ indices_qpos_der = [model.jnt_qposadr[mujoco.mj_name2id(
 # ==========================================
 
 
+def resolver_ik(target_izq, yaw_izq, target_der, yaw_der):
+    global angulos_previos_izq, angulos_previos_der
+    R_izq = matriz_rotacion_rpy(0.0, 0.0, yaw_izq) @ orientacion_plana_izq
+    R_der = matriz_rotacion_rpy(0.0, 0.0, yaw_der) @ orientacion_plana_der
+    sol_izq = pierna_izquierda.inverse_kinematics(
+        target_position=target_izq, target_orientation=R_izq,
+        orientation_mode="all", initial_position=angulos_previos_izq)
+    sol_der = pierna_derecha.inverse_kinematics(
+        target_position=target_der, target_orientation=R_der,
+        orientation_mode="all", initial_position=angulos_previos_der)
+    angulos_previos_izq, angulos_previos_der = sol_izq, sol_der
+    return np.array(sol_izq), np.array(sol_der)
+
+
+def precalcular_marcha(params):
+    """
+    La marcha es periódica: se resuelve la IK UNA vez (rampa + 1 ciclo estable) y en el loop
+    solo se interpola la tabla. En la Raspberry la IK de ikpy tarda ~20 ms por pierna, muy
+    lento para 60 Hz en vivo. La tabla se guarda en cache_marcha/ y la próxima vez carga al tiro.
+    """
+    import os
+    import hashlib
+    generador = GeneradorMarcha(params, neutro_izq, neutro_der)
+    print("Marcha:", generador.resumen())
+
+    clave = hashlib.md5((repr(params) + repr(LIMITES_ARTIC) + str(FPS_TABLA)).encode()).hexdigest()[:12]
+    ruta = os.path.join("cache_marcha", f"marcha_{clave}.npz")
+    if os.path.exists(ruta):
+        d = np.load(ruta)
+        print(f"Tabla de marcha cargada desde {ruta}")
+        return d["postura_izq"], d["postura_der"], d["q_izq"], d["q_der"], float(d["t_rampa"])
+
+    # Postura de pie (fase 0, intensidad 0)
+    pie_izq0, _, pie_der0, _ = generador.objetivos(0.0, intensidad=0.0)
+    postura_izq, postura_der = resolver_ik(pie_izq0, 0.0, pie_der0, 0.0)
+
+    t_rampa = CICLOS_RAMPA * params.periodo
+    n = int(round((t_rampa + params.periodo) * FPS_TABLA))
+    q_izq, q_der = np.zeros((n, 7)), np.zeros((n, 7))
+    print(f"Precalculando {n} cuadros de IK (solo la primera vez con estos parámetros)...")
+    t0 = time.time()
+    for k in range(n):
+        t = k / FPS_TABLA
+        intensidad = min(1.0, t / t_rampa)
+        ti, yi, td, yd = generador.objetivos(t, intensidad)
+        q_izq[k], q_der[k] = resolver_ik(ti, yi, td, yd)
+        if k % 60 == 0:
+            print(f"  {k}/{n}")
+    print(f"Listo en {time.time() - t0:.1f} s")
+    os.makedirs("cache_marcha", exist_ok=True)
+    np.savez(ruta, postura_izq=postura_izq, postura_der=postura_der,
+             q_izq=q_izq, q_der=q_der, t_rampa=t_rampa)
+    return postura_izq, postura_der, q_izq, q_der, t_rampa
+
+
+def muestrear_tabla(tabla, t, t_rampa, periodo):
+    """Interpola la tabla: la rampa se reproduce una vez y luego el último ciclo en bucle."""
+    if t >= t_rampa:
+        t = t_rampa + (t - t_rampa) % periodo
+    u = t * FPS_TABLA
+    i = int(u)
+    a = u - i
+    n = len(tabla)
+    j = i + 1
+    if j >= n:                       # el cuadro siguiente al último es el inicio del ciclo estable
+        j = int(round(t_rampa * FPS_TABLA)) + (j - n)
+    i = min(i, n - 1)
+    return (1 - a) * tabla[i] + a * tabla[j]
+
+
 def iniciar_robot(visualizar=False, params=None):
     viewer = None
+
+    # Parámetros de marcha (ver marcha.py). Ajustar con validar_marcha.py antes de probar en el robot
+    params = params or ParamsMarcha()
+    postura_izq, postura_der, tabla_izq, tabla_der, t_rampa = precalcular_marcha(params)
 
     # Solo los servos detectados entrarán a estos diccionarios
     centros_fisicos_izq = {}
@@ -219,11 +294,6 @@ def iniciar_robot(visualizar=False, params=None):
         portHandler.closePort()
         return
 
-    # Parámetros de marcha (ver marcha.py). Ajustar con validar_marcha.py antes de probar en el robot
-    params = params or ParamsMarcha()
-    generador = GeneradorMarcha(params, neutro_izq, neutro_der)
-    print("Marcha:", generador.resumen())
-
     if visualizar:
         print("Lanzando entorno gráfico MuJoCo...")
         viewer = mujoco.viewer.launch_passive(model, data)
@@ -236,25 +306,6 @@ def iniciar_robot(visualizar=False, params=None):
     else:
         print("Ejecutando en MODO PRODUCCIÓN (Sin GUI). Presiona Ctrl+C para detener.")
 
-    global angulos_previos_izq, angulos_previos_der
-
-    def resolver_ik(target_izq, yaw_izq, target_der, yaw_der):
-        global angulos_previos_izq, angulos_previos_der
-        R_izq = matriz_rotacion_rpy(0.0, 0.0, yaw_izq) @ orientacion_plana_izq
-        R_der = matriz_rotacion_rpy(0.0, 0.0, yaw_der) @ orientacion_plana_der
-        sol_izq = pierna_izquierda.inverse_kinematics(
-            target_position=target_izq, target_orientation=R_izq,
-            orientation_mode="all", initial_position=angulos_previos_izq)
-        sol_der = pierna_derecha.inverse_kinematics(
-            target_position=target_der, target_orientation=R_der,
-            orientation_mode="all", initial_position=angulos_previos_der)
-        angulos_previos_izq, angulos_previos_der = sol_izq, sol_der
-        return sol_izq, sol_der
-
-    # Postura de pie (fase 0 con intensidad 0) y su solución IK
-    pie_izq0, _, pie_der0, _ = generador.objetivos(0.0, intensidad=0.0)
-    postura_izq, postura_der = resolver_ik(pie_izq0, 0.0, pie_der0, 0.0)
-    postura_izq, postura_der = np.array(postura_izq), np.array(postura_der)
     ultimo_izq = np.zeros(7)
     ultimo_der = np.zeros(7)
     max_paso_rad = VEL_MAX_SOFT / 60.0   # límite de cambio por ciclo de control
@@ -281,14 +332,10 @@ def iniciar_robot(visualizar=False, params=None):
                 solucion_izq = s * postura_izq
                 solucion_der = s * postura_der
             else:
-                # --- A. Generador de Trayectorias (pies planos, LIPM) ---
+                # --- A/B. Marcha precalculada (generador LIPM + IK) interpolada en el tiempo ---
                 t = t_total - T_AGACHARSE
-                # Rampa de intensidad: primeros ciclos con pasos y balanceo crecientes
-                intensidad = min(1.0, t / (CICLOS_RAMPA * params.periodo))
-                target_izq, yaw_izq, target_der, yaw_der = generador.objetivos(t, intensidad)
-
-                # --- B. Cinemática Inversa ---
-                solucion_izq, solucion_der = resolver_ik(target_izq, yaw_izq, target_der, yaw_der)
+                solucion_izq = muestrear_tabla(tabla_izq, t, t_rampa, params.periodo)
+                solucion_der = muestrear_tabla(tabla_der, t, t_rampa, params.periodo)
 
             # Limitador de seguridad: ningún servo cambia más de max_paso_rad por ciclo
             solucion_izq = ultimo_izq + np.clip(np.array(solucion_izq) - ultimo_izq, -max_paso_rad, max_paso_rad)
