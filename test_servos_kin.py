@@ -218,31 +218,29 @@ def muestrear_tabla(tabla, t, t_rampa, periodo):
     return (1 - a) * tabla[i] + a * tabla[j]
 
 
-def iniciar_robot(visualizar=False, params=None):
-    viewer = None
+# Sentido de giro de cada servo respecto al URDF (True = invertido)
+CONFIG_GIRO_IZQ = {6: False, 7: True,
+                   8: True, 9: True, 10: False, 11: False}
+CONFIG_GIRO_DER = {0: False, 1: False,
+                   2: False, 3: False, 4: False, 5: True}
 
-    # Parámetros de marcha (ver marcha.py). Ajustar con validar_marcha.py antes de probar en el robot
-    params = params or ParamsMarcha()
-    postura_izq, postura_der, tabla_izq, tabla_der, t_rampa = precalcular_marcha(params)
 
+def conectar_servos():
+    """Abre el bus, captura offsets (posición CERO) y deja torque activo.
+    Devuelve (portHandler, packetHandler, centros_izq, centros_der) o None si falla."""
     # Solo los servos detectados entrarán a estos diccionarios
     centros_fisicos_izq = {}
     centros_fisicos_der = {}
-
-    config_giro_izq = {6: False, 7: True,
-                       8: True, 9: True, 10: False, 11: False}
-    config_giro_der = {0: False, 1: False,
-                       2: False, 3: False, 4: False, 5: True}
 
     portHandler = PortHandler(PUERTO)
     packetHandler = PacketHandler(2.0)
 
     if not portHandler.openPort():
         print(f"Error crítico: No se pudo abrir {PUERTO}.")
-        return
+        return None
     if not portHandler.setBaudRate(BAUD_RATE):
         print(f"Error crítico: No se pudo establecer Baudrate a {BAUD_RATE}.")
-        return
+        return None
 
     print("Sostén las piezas conectadas en la posición CERO. Capturando offsets en 3 segundos...")
     time.sleep(3)
@@ -296,7 +294,34 @@ def iniciar_robot(visualizar=False, params=None):
     if not centros_fisicos_izq and not centros_fisicos_der:
         print("Falla crítica: Ningún servo detectado en el bus. Cerrando programa.")
         portHandler.closePort()
+        return None
+
+    return portHandler, packetHandler, centros_fisicos_izq, centros_fisicos_der
+
+
+def enviar_angulos(groupSyncWrite, solucion_izq, solucion_der, centros_fisicos_izq, centros_fisicos_der):
+    """Convierte ángulos IK (rad, formato ikpy de 7) a pasos Dynamixel y los manda en un SYNC WRITE."""
+    groupSyncWrite.clearParam()
+    for ids, sol, centros, giro in ((SERVO_IDS_IZQ, solucion_izq, centros_fisicos_izq, CONFIG_GIRO_IZQ),
+                                    (SERVO_IDS_DER, solucion_der, centros_fisicos_der, CONFIG_GIRO_DER)):
+        for i, servo_id in enumerate(ids):
+            if servo_id in centros:
+                pasos = rad_a_dynamixel(sol[i + 1], centros[servo_id], giro[servo_id])
+                groupSyncWrite.addParam(servo_id, list((pasos & 0xFFFFFFFF).to_bytes(4, byteorder='little')))
+    groupSyncWrite.txPacket()
+
+
+def iniciar_robot(visualizar=False, params=None):
+    viewer = None
+
+    # Parámetros de marcha (ver marcha.py). Ajustar con validar_marcha.py antes de probar en el robot
+    params = params or ParamsMarcha()
+    postura_izq, postura_der, tabla_izq, tabla_der, t_rampa = precalcular_marcha(params)
+
+    conexion = conectar_servos()
+    if conexion is None:
         return
+    portHandler, packetHandler, centros_fisicos_izq, centros_fisicos_der = conexion
 
     if visualizar:
         print("Lanzando entorno gráfico MuJoCo...")
@@ -356,42 +381,8 @@ def iniciar_robot(visualizar=False, params=None):
                 viewer.sync()
 
             # --- D. Inyección a Hardware Físico (SYNC WRITE) ---
-
-            # Limpiar los parámetros del paquete anterior
-            groupSyncWrite.clearParam()
-
-            # 1. Empaquetar posiciones de la Pierna Izquierda
-            for i, servo_id in enumerate(SERVO_IDS_IZQ):
-                if servo_id in centros_fisicos_izq:
-                    rads = solucion_izq[i + 1]
-                    pasos = rad_a_dynamixel(
-                        rads, centros_fisicos_izq[servo_id], config_giro_izq[servo_id])
-
-                    # Convertir el entero a una matriz de 4 bytes (Little Endian)
-                    pasos_formateados = pasos & 0xFFFFFFFF
-                    param_goal_position = list(
-                        pasos_formateados.to_bytes(4, byteorder='little'))
-
-                    # Añadir al paquete maestro
-                    groupSyncWrite.addParam(servo_id, param_goal_position)
-
-            # 2. Empaquetar posiciones de la Pierna Derecha
-            for i, servo_id in enumerate(SERVO_IDS_DER):
-                if servo_id in centros_fisicos_der:
-                    rads = solucion_der[i + 1]
-                    pasos = rad_a_dynamixel(
-                        rads, centros_fisicos_der[servo_id], config_giro_der[servo_id])
-
-                    # Convertir el entero a una matriz de 4 bytes (Little Endian)
-                    pasos_formateados = pasos & 0xFFFFFFFF
-                    param_goal_position = list(
-                        pasos_formateados.to_bytes(4, byteorder='little'))
-
-                    # Añadir al paquete maestro
-                    groupSyncWrite.addParam(servo_id, param_goal_position)
-
-            # 3. Disparar el paquete sincronizado al bus (Un solo envío para todos los motores)
-            groupSyncWrite.txPacket()
+            enviar_angulos(groupSyncWrite, solucion_izq, solucion_der,
+                           centros_fisicos_izq, centros_fisicos_der)
 
             # Imprime el timestamp y el ciclo para monitorizar los FPS
             contador += 1
