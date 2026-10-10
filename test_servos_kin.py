@@ -225,8 +225,8 @@ def iniciar_robot(visualizar=False, params=None):
     centros_fisicos_izq = {}
     centros_fisicos_der = {}
 
-    config_giro_izq = {6: True, 7: False,
-                       8: False, 9: False, 10: False, 11: False}
+    config_giro_izq = {6: False, 7: True,
+                       8: True, 9: True, 10: False, 11: False}
     config_giro_der = {0: False, 1: False,
                        2: False, 3: False, 4: False, 5: True}
 
