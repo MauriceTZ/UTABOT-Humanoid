@@ -190,6 +190,10 @@ def precalcular_marcha(params):
         intensidad = min(1.0, t / t_rampa)
         ti, yi, td, yd = generador.objetivos(t, intensidad)
         q_izq[k], q_der[k] = resolver_ik(ti, yi, td, yd)
+        # angulos_previos queda SIN compensar (la IK sigue sobre la trayectoria ideal)
+        off_i, off_d = generador.compensacion_gravedad(t, intensidad)
+        q_izq[k] += off_i
+        q_der[k] += off_d
         if k % 60 == 0:
             print(f"  {k}/{n}")
     print(f"Listo en {time.time() - t0:.1f} s")
@@ -429,9 +433,19 @@ if __name__ == "__main__":
     parser.add_argument('--xcom', type=float, default=0.0, help="cm, corrimiento X del CoM")
     parser.add_argument('--balanceo', type=float, default=1.0, help="ganancia del balanceo lateral")
     parser.add_argument('--giro', type=float, default=0.0, help="grados de giro por ciclo")
+    parser.add_argument('--comp-cadera', type=float, default=0.0,
+                        help="grados de roll de cadera extra hacia afuera en la pierna de apoyo")
+    parser.add_argument('--comp-tobillo', type=float, default=0.0,
+                        help="grados de roll de tobillo extra en la pierna de apoyo")
+    parser.add_argument('--abrir-vuelo', type=float, default=0.0,
+                        help="cm que el pie en vuelo se abre hacia afuera a mitad del paso")
+    parser.add_argument('--separacion', type=float, default=0.0,
+                        help="cm extra de separación entre pies")
     args = parser.parse_args()
 
     iniciar_robot(visualizar=args.visualizar, params=ParamsMarcha(
         periodo=args.periodo, largo_paso=args.paso, altura_paso=args.altura,
         doble_apoyo=args.doble_apoyo, z_com=args.zcom, x_com=args.xcom,
-        ganancia_balanceo=args.balanceo, giro_por_ciclo=args.giro))
+        ganancia_balanceo=args.balanceo, giro_por_ciclo=args.giro,
+        comp_cadera_roll=args.comp_cadera, comp_tobillo_roll=args.comp_tobillo,
+        abrir_vuelo=args.abrir_vuelo, separacion_extra=args.separacion))

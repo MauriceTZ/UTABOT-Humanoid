@@ -39,6 +39,10 @@ class ParamsMarcha:
     separacion_extra: float = 0.0   # cm, abre (+) o cierra (-) los pies lateralmente
     giro_por_ciclo: float = 0.0   # grados de yaw por ciclo (+ = gira a la izquierda)
     zmp_x_pie: float = -1.49      # cm, centro de la planta respecto al punto IK (del URDF)
+    # --- Compensación de cedencia por gravedad (feedforward) ---
+    comp_cadera_roll: float = 0.0  # grados extra de roll de cadera HACIA AFUERA en la pierna de apoyo
+    comp_tobillo_roll: float = 0.0 # grados extra de roll de tobillo en la pierna de apoyo (mismo sentido)
+    abrir_vuelo: float = 0.0      # cm que el pie en vuelo se abre hacia afuera a mitad del paso
     muestras: int = 512           # resolución de la tabla del ciclo
 
 
@@ -129,7 +133,8 @@ class GeneradorMarcha:
         # objetivos relativos a la cadera (base_link)
         self.rel = dict(
             xi=xi - com_x + p.x_com, xd=xd - com_x + p.x_com,
-            yi=self.y_izq - com_y, yd=self.y_der - com_y,
+            yi=self.y_izq - com_y + p.abrir_vuelo * np.where(vuela_i, np.sin(np.pi * np.clip(si, 0, 1))**2, 0.0),
+            yd=self.y_der - com_y - p.abrir_vuelo * np.where(vuela_d, np.sin(np.pi * np.clip(sd, 0, 1))**2, 0.0),
             zi=p.z_cadera + zi, zd=p.z_cadera + zd,
         )
 
@@ -175,6 +180,43 @@ class GeneradorMarcha:
         apoyo = 1 - (fin - ini)                           # apoyo: +g/2 -> -g/2 lineal
         s = ((f - fin) % 1.0) / apoyo
         return g / 2 - g * s
+
+    def carga(self, t, intensidad=1.0):
+        """
+        Fracción del peso sobre cada pie (0..1), según dónde está el ZMP entre ambos pies.
+        Sirve para escalar la compensación de gravedad: 1 en apoyo simple, transición en doble apoyo.
+        Devuelve (carga_izq, carga_der).
+        """
+        py = self._interp(self.tab["py"], t / self.p.periodo)
+        w_izq = float(np.clip((py - self.y_der) / (self.y_izq - self.y_der), 0.0, 1.0))
+        # Con intensidad < 1 (rampa) se reparte hacia 50/50
+        w_izq = 0.5 + intensidad * (w_izq - 0.5)
+        return w_izq, 1.0 - w_izq
+
+    def compensacion_gravedad(self, t, intensidad=1.0):
+        """
+        Offsets articulares (rad) a SUMAR después de la IK, por pierna, en orden de la cadena ikpy
+        [base, cad_roll, cad_pitch, rodilla, tob_pitch, tob_yaw, tob_roll].
+
+        Bajo carga, el roll de cadera de la pierna de apoyo cede y la pelvis cae hacia el lado del
+        pie en vuelo; ese pie baja y se cruza hacia adentro. Se manda el roll "de más" hacia afuera
+        en proporción a la carga para que, al ceder, quede donde debía.
+        En el frame del URDF un roll + mueve el pie hacia -Y en ambas piernas:
+          afuera izq (+Y) = roll negativo, afuera der (-Y) = roll positivo.
+        Solo se cuenta la carga por ENCIMA del 50%: en doble apoyo parejo no se compensa nada.
+        """
+        w_izq, w_der = self.carga(t, intensidad)
+        exceso_i = max(0.0, 2 * w_izq - 1)
+        exceso_d = max(0.0, 2 * w_der - 1)
+        cad = math.radians(self.p.comp_cadera_roll)
+        tob = math.radians(self.p.comp_tobillo_roll)
+        off_i = np.zeros(7)
+        off_d = np.zeros(7)
+        off_i[1] = -cad * exceso_i
+        off_d[1] = +cad * exceso_d
+        off_i[6] = -tob * exceso_i
+        off_d[6] = +tob * exceso_d
+        return off_i, off_d
 
     def resumen(self):
         p = self.p

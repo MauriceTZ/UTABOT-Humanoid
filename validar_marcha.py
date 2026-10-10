@@ -63,7 +63,8 @@ def simular(p: ParamsMarcha, fps=60, ciclos=2):
         prev_i, prev_d = si, sd
         errs.append(max(np.linalg.norm(izq.forward_kinematics(si)[:3, 3] - ti),
                         np.linalg.norm(der.forward_kinematics(sd)[:3, 3] - td)))
-        qs.append(np.concatenate([si[1:], sd[1:]]))
+        oi, od = gen.compensacion_gravedad(t)   # offsets intencionales: van después del chequeo de error
+        qs.append(np.concatenate([(si + oi)[1:], (sd + od)[1:]]))
     q = np.array(qs)[int(p.periodo * fps):]       # descarta el 1er ciclo (arranque IK)
     dq = np.gradient(q, 1 / fps, axis=0)
     ddq = np.gradient(dq, 1 / fps, axis=0)
