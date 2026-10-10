@@ -27,3 +27,20 @@ Para iniciar el programa principal, ejecuta:
 python test_servos_kin.py
 
 ```
+
+## Control manual de las piernas
+
+Mueve el pie de cada pierna en XYZ desde la terminal (funciona por SSH):
+
+```bash
+python control_manual.py                          # con servos
+python control_manual.py --sin-servos --visualizar  # solo simulación
+```
+
+| Pierna izquierda | Pierna derecha | Movimiento |
+|---|---|---|
+| W / S | I / K | X adelante / atrás |
+| A / D | J / L | Y izquierda / derecha |
+| E / Q | O / U | Z subir / bajar |
+
+`+`/`-` cambian el tamaño del paso, `ESPACIO` vuelve a la postura de pie, `P` imprime los ángulos y `X` sale (apaga el torque).
